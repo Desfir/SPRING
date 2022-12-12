@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Личный кабинет администратора</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/footer.css}">
+    <style>
+        h2{
+
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1 class="logo">RETRO GAME STORE</h1>
+    <nav>
+        <form method="get" th:action="@{/admin}">
+            <input class="nav-item"  type="submit" value="Главная">
+        </form>
+        <form method="get" th:action="@{/product}">
+            <input class="nav-item"  type="submit" value="Каталог">
+        </form>
+        <form method="get" th:action="@{/admin}">
+            <input class="nav-item"  type="submit" value="Личный кабинет">
+        </form>
+        <form method="get" th:action="@{/admin/product/add}">
+            <input class="nav-item"  type="submit" value="Добавить товар">
+        </form>
+
+    </nav>
+</header>
+
+<br>
+<br>
+<center>
+    <img style="
+    width: 95%;
+    height: 370px;
+    border-radius: 30px" th:src="@{/img/b.jpg}")>
+</center>
+
+
+<h2>Личный кабинет администратора:</h2>
+
+<h3>Список пользователей сайта:</h3>
+<div th:each="person : ${person}">
+    <hr>
+    <p th:text="'ID - Пользователя: ' + ${person.getId()}"></p>
+    <p th:text="'Логин пользователя: ' + ${person.getLogin()}"></p>
+    <p th:text="'Роль пользователя: ' + ${person.getRole()}"></p>
+    <hr>
+</div>
+
+<br>
+<form method="post" th:action="@{/logout}">
+    <input class="submit-button" type="submit" value="Выйти из личного кабинета">
+</form>
+<br>
+<br>
+
+<h2>Список товаров для редактирования:</h2>
+<div class="product-container">
+<div class="product-item" th:each="product : ${products}">
+    <p th:text="'Наименование: ' + ${product.getTitle()}"></p>
+    <p th:text="'Описание: ' + ${product.getDescription()}"></p>
+    <p th:text="'Цена: ' + ${product.getPrice()} + ' рублей'"></p>
+    <p th:text="'Склад: ' + ${product.getWarehouse()}"></p>
+    <p th:text="'Продавец: ' + ${product.getSeller()}"></p>
+    <p th:text="'Категория: ' + ${product.getCategory().getName()}"></p>
+    <a th:href="@{/admin/product/edit/{id}(id=${product.getId()})}">Редактировать товар</a>
+    <a th:href="@{/admin/product/delete/{id}(id=${product.getId()})}">Удалить товар</a>
+    <hr>
+</div>
+</div>
+<footer>
+    <div class="logo" style="font-size: 30px">RETRO GAME STORE</div>
+    <p>Компания с многолетним опытом продаж околоигровых товаров в Тюмени. Развивающийся интернет-магазин с доставкой игровых приставок, игр, и аксессуаров по всей России. RETRO GAME STORE работает c 2022 года на рынке Тюмени. За это время мы осчастливили множество геймеров в возрасте от 3 до 80 лет ( у нас есть один дедушка постоянный клиент).</p>
+    <p style="text-align: center; font-size: small; font-family: monospace">&#169;copyright 2022 all rights reserved</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Моя корзина</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/footer.css}">
+</head>
+<body>
+
+<header>
+    <h1 class="logo">RETRO GAME STORE</h1>
+    <nav>
+        <form method="get" th:action="@{/index}">
+            <input class="nav-item"  type="submit" value="Главная">
+        </form>
+        <form method="get" th:action="@{/product}">
+            <input class="nav-item"  type="submit" value="Каталог">
+        </form>
+        <form method="get" th:action="@{/index}">
+            <input class="nav-item"  type="submit" value="Личный кабинет">
+        </form>
+        <form method="get" th:action="@{/orders}">
+            <input class="nav-item"  type="submit" value="Мои заказы">
+        </form>
+        <form method="get" th:action="@{/cart}">
+            <input class="nav-item"  type="submit" value="Корзина">
+        </form>
+    </nav>
+</header>
+
+
+<h3>Корзина: </h3>
+<div class="product-container">
+<div class="product-item" th:each="product : ${cart_product}">
+    <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="300px">
+    <br>
+    <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>
+    <p th:text="'Цена: ' + ${product.getPrice()} + ' рублей'"></p>
+    <a th:href="@{/cart/delete/{id}(id=${product.getId()})}">Удалить из корзины</a>
+</div>
+</div>
+<h3 th:text="'Итого: ' + ${price} + ' рублей'"></h3>
+<a href="/order/create">Оформить заказ</a>
+<br>
+<br>
+
+<footer>
+    <div class="logo" style="font-size: 30px">RETRO GAME STORE</div>
+    <p>Компания с многолетним опытом продаж околоигровых товаров в Тюмени. Развивающийся интернет-магазин с доставкой игровых приставок, игр, и аксессуаров по всей России. RETRO GAME STORE работает c 2022 года на рынке Тюмени. За это время мы осчастливили множество геймеров в возрасте от 3 до 80 лет ( у нас есть один дедушка постоянный клиент).</p>
+    <p style="text-align: center; font-size: small; font-family: monospace">&#169;copyright 2022 all rights reserved</p>
+</footer>
+</body>
+</html>

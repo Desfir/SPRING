@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Информация о товаре</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/footer.css}">
+</head>
+<body>
+
+<header>
+
+    <h1 class="logo">RETRO GAME STORE</h1>
+    <nav>
+        <form method="get" th:action="@{/product}">
+            <input class="nav-item"  type="submit" value="Главная">
+        </form>
+        <form method="get" th:action="@{/product}">
+            <input class="nav-item"  type="submit" value="Каталог">
+        </form>
+        <form method="get" th:action="@{/authentication/login}">
+            <input class="nav-item"  type="submit" value="Вход">
+        </form>
+        <form method="get" th:action="@{/authentication/registration}">
+            <input class="nav-item"  type="submit" value="Регистрация">
+        </form>
+    </nav>
+</header>
+
+<br>
+<br>
+<center>
+    <img style="
+    width: 95%;
+    height: 370px;
+    border-radius: 30px" th:src="@{/img/b.jpg}")>
+</center>
+
+
+<h2>Информация о товаре:</h2>
+<p th:text="'Наименование: ' + ${product.getTitle()}"></p>
+<p th:text="'Описание: ' + ${product.getDescription()}"></p>
+<p th:text="'Цена: ' + ${product.getPrice()} + ' рублей'"></p>
+<p th:text="'Склад: ' + ${product.getWarehouse()}"></p>
+<p th:text="'Продавец: ' + ${product.getSeller()}"></p>
+<p th:text="'Категория: ' + ${product.getCategory().getName()}"></p>
+
+<div th:each="img : ${product.getImageList()}">
+    <img th:src="'/img/' + ${img.getFileName()}" width="300px">
+</div>
+
+<footer>
+    <div class="logo" style="font-size: 30px">RETRO GAME STORE</div>
+    <p>Компания с многолетним опытом продаж околоигровых товаров в Тюмени. Развивающийся интернет-магазин с доставкой игровых приставок, игр, и аксессуаров по всей России. RETRO GAME STORE работает c 2022 года на рынке Тюмени. За это время мы осчастливили множество геймеров в возрасте от 3 до 80 лет ( у нас есть один дедушка постоянный клиент).</p>
+    <p style="text-align: center; font-size: small; font-family: monospace">&#169;copyright 2022 all rights reserved</p>
+</footer>
+</body>
+</html>

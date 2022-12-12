@@ -1,0 +1,48 @@
+.banner_section{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    margin: 50px;
+}
+
+.banner{
+    display: grid;
+    grid-template-columns: 0.5fr 1fr;
+    justify-items: end;
+    align-items: center;
+    background-image: url("static/img/b.jpg");
+    background-size:cover;
+    background-position: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    border-radius: 30px;
+}
+
+.text-banner{
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.text-banner span{
+    color: white;
+}
+
+.banner-btn{
+    background-color: #001AFF;
+    color: white;
+    margin-top: 20px;
+    padding: 20px;
+    padding-left: 25px;
+    padding-right: 25px;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    transition: box-shadow 0.2s ease-out;
+}
+
+.banner-btn:hover{
+    box-shadow: 7px 7px 7px 0px #616161;
+}

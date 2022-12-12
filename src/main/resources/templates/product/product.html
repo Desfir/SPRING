@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>RETRO GAME STORE</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/footer.css}">
+</head>
+<body>
+
+<header>
+
+    <h1 class="logo">RETRO GAME STORE</h1>
+    <nav>
+        <form method="get" th:action="@{/product}">
+            <input class="nav-item"  type="submit" value="Главная">
+        </form>
+        <form method="get" th:action="@{/product}">
+            <input class="nav-item"  type="submit" value="Каталог">
+        </form>
+        <form method="get" th:action="@{/authentication/login}">
+            <input class="nav-item"  type="submit" value="Вход">
+        </form>
+        <form method="get" th:action="@{/authentication/registration}">
+            <input class="nav-item"  type="submit" value="Регистрация">
+        </form>
+    </nav>
+</header>
+<br>
+<br>
+<center>
+    <img style="
+    width: 95%;
+    height: 370px;
+    border-radius: 30px" th:src="@{/img/b.jpg}")>
+</center>
+
+<h2 style="text-align: center">О нас</h2>
+
+<p>Компания с многолетним опытом продаж околоигровых товаров в Тюмени. Развивающийся интернет-магазин с доставкой игровых приставок, игр, и аксессуаров по всей России. RETRO GAME STORE работает c 2022 года на рынке Тюмени. За это время мы осчастливили множество геймеров в возрасте от 3 до 80 лет ( у нас есть один дедушка постоянный клиент).</p>
+    Наши сильные стороны:
+    <ul style="font-style: italic">
+    <li>Большой красивый магазин в ТЦ Колумб</li>
+        <li>Увлеченные сотрудники, готовые к общению с клиентами</li>
+        <li>Доставка наших товаров в любой город России и СНГ с помощью Почты России и множества транспортных компаний, в том числе CDEK, Boxberry, EMS</li>
+    <li>Возможность покупки товаров в кредит и рассрочку с помощью ведущих банков России.</li>
+    </ul>
+<br>
+<br>
+
+<h2>Поиск товаров на сайте:</h2>
+
+<form th:method="POST" th:action="@{/product/search}">
+    <fieldset style="border-color:#2dabf9; border-radius: 20px">
+        <legend>Выберите параметр для сортировки: </legend>
+        <br>
+        <label for="search">Поиск по наименованию:</label><br><br>
+        <input name="search" id="search" th:value="*{value_search}">
+        <br>
+        <p>Цена, ₽</p>
+        <label for="ot">От</label>
+        <input type="text" name="ot" id="ot" th:value="*{value_price_ot}">
+        <label for="do">До</label>
+        <input type="text" name="do" id="do" th:value="*{value_price_do}">
+        <br>
+        <br>
+        <div>
+            <label for="ascending_price">Отсортировать по возрастанию цены:</label>
+            <input type="radio" id="ascending_price" name="price" value="sorted_by_ascending_price">
+            <br>
+            <br>
+            <label for="descending_price">Отсортировать по убыванию цены:</label>
+            <input type="radio" id="descending_price" name="price" value="sorted_by_descending_price">
+            <p>Категория товаров: </p>
+            <label for="furniture">Домашние консоли</label>
+            <input type="radio" id="furniture" name="contact" value="furniture">
+            <label for="appliances">Портативные консоли</label>
+            <input type="radio" id="appliances" name="contact" value="appliances">
+            <label for="clothes">Игры</label>
+            <input type="radio" id="clothes" name="contact" value="clothes">
+            <br>
+            <br>
+            <input class="submit-button" type="submit" value="Найти">
+        </div>
+    </fieldset>
+    <br>
+</form>
+<h2>Результат поиска:</h2>
+<div class="product-container">
+<div class="product-item" th:each="product : ${search_product}">
+    <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="300px">
+    <br>
+    <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>
+    <p>Цена:</p>
+    <p class="price" th:text="${product.getPrice()} + ' рублей'"></p>
+    <hr>
+</div>
+</div>
+<hr>
+<h2>Каталог товаров: </h2>
+<div class="product-container">
+<div class="product-item" th:each="product : ${products}">
+    <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="300px">
+    <br>
+    <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>
+    <p>Цена:</p>
+    <p class="price" th:text="${product.getPrice()} + ' рублей'"></p>
+    <hr>
+</div>
+</div>
+<footer>
+    <div class="logo" style="font-size: 30px">RETRO GAME STORE</div>
+    <p>Компания с многолетним опытом продаж околоигровых товаров в Тюмени. Развивающийся интернет-магазин с доставкой игровых приставок, игр, и аксессуаров по всей России. RETRO GAME STORE работает c 2022 года на рынке Тюмени. За это время мы осчастливили множество геймеров в возрасте от 3 до 80 лет ( у нас есть один дедушка постоянный клиент).</p>
+    <p style="text-align: center; font-size: small; font-family: monospace">&#169;copyright 2022 all rights reserved</p>
+</footer>
+</body>
+</html>
